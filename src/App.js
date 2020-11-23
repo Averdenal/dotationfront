@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import Navigation from "./Components/Nav"
+import AllCatPage from "./Pages/CatPages/AllCatPage";
+import AddComputerPage from "./Pages/computer/AddComputerPage";
+import OsPage from "./Pages/Os/OsPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <>
+    <Router forceRefresh={true}>
+      <Navigation />
+      <Switch>
+        <Route path={"/"} exact component={HomePage} />
+        <Route path={"/Category"} exact component={AllCatPage} />
+        <Route path={"/Computer/Add"} exact component={AddComputerPage} />
+
+        <Route path={"/Os"} exact component={OsPage} />
+
+      </Switch>
+    </Router>
+  </>
   );
 }
 
