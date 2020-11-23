@@ -1,5 +1,4 @@
-import {Link} from "react-router-dom";
-import {Button, Nav, NavDropdown} from "react-bootstrap";
+import {Nav, NavDropdown} from "react-bootstrap";
 
 function Navigation() {
     return(

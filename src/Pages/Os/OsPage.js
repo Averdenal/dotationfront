@@ -3,7 +3,7 @@ import {Container,Table,Button} from "react-bootstrap";
 import Axios from "axios";
 
 import "./OsPage.css"
-import FromOS from "../../Components/Form/FormOS";
+import FormOS from "../../Components/Form/FormOS";
 import FormDeleteOs from "../../Components/Form/os/FormDeleteOs";
 
 class OsPage extends React.Component{
@@ -11,7 +11,8 @@ class OsPage extends React.Component{
         super(props);
         this.state = {
             os:[],
-            add:false
+            add:false,
+            new:false,
 
         }
     }
@@ -19,13 +20,13 @@ class OsPage extends React.Component{
         Axios.get(process.env.REACT_APP_ROOT_API+"/Os")
             .then((res) =>{
                 this.setState({os: res.data})
-                console.log(this.state.os)
             })
     }
+
     render() {
         return (
-            <Container fluid={true}>
-                <h1>Système d'exploration</h1>
+            <Container fluid={true} id={"page"}>
+                <h1>Système d'exploitation</h1>
                 <p>les systèmes d'explotation disponible</p>
                 <div>
                     <Table striped bordered hover>
@@ -34,7 +35,8 @@ class OsPage extends React.Component{
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Version</th>
-                                <th colSpan={2}>Actions</th>
+                                <th>Actions</th>
+                                <th><FormOS /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,10 +46,10 @@ class OsPage extends React.Component{
                                 <td>{item.Name}</td>
                                 <td>{item.Version}</td>
                                 <td className={"btn-Action"}>
-                                    <FormDeleteOs/>
+                                    <FormDeleteOs id={item.ID}/>
                                 </td>
                                 <td>
-                                    <Button variant={"warning"}>Update</Button>
+                                    <FormOS id={item.ID} />
                                 </td>
                             </tr>
                             ))}
@@ -55,7 +57,7 @@ class OsPage extends React.Component{
                         </tbody>
                     </Table>
                 </div>
-                <FromOS/>
+
             </Container>
         );
     }
